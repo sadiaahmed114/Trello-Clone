@@ -1,0 +1,43 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-image: url('Image/OIP.jpeg');
+}
+.app-header{
+    display: flex;
+    justify-content: center;
+    /* background-color: black; */
+    color:blueviolet;
+    /* color: black; */
+    background-color: rgb(27, 25, 78);
+}
+.app-main{
+    padding: 2em;
+    color: antiquewhite;
+    display: flex;
+    gap: 1em;
+    overflow-x: auto;
+}
+.app-main .column{
+    /* background-color: rgb(184, 110, 123); */
+    background-color: rgb(127, 81, 171);
+    min-width: 18em;
+    min-height: 6em;
+    border-radius: 10px;
+    padding: 1em;
+}
+.app-main .column .column-heading{
+    font-size: 1.5em;
+    /* justify-content: center;
+    /* text-align: center; */
+    /* display: flex; */ 
+}
+.app-main .column .ticket{
+    background-color: rgb(209, 138, 204);
+    padding: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 6px;
+    color: black;
+}
