@@ -27,6 +27,9 @@ body{
     border-radius: 10px;
     padding: 1em;
 }
+.app-main .column-dropable {
+    background-color: rgb(253, 253, 182);
+}
 .app-main .column .column-heading{
     font-size: 1.5em;
     /* justify-content: center;
