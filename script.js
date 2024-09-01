@@ -46,6 +46,28 @@
 //     })
 // });
 
+document.querySelector('#addTicketForm').addEventListener('submit' , (event) => {
+    event.preventDefault();
+
+    let userInput = document.querySelector('#ticketText').ariaValueMax;
+
+    let div = document.createElement("div")
+    div.setAttribute("draggable" , "true")
+    div.setAttribute("class" , "ticket")
+    let t = document.createTextNode(userInput);
+
+    div.appendChild(t);
+
+    let column = event.target.parentNode;
+    console.log("column:" , column);
+
+    column.insertBefore(div , event.target)
+
+    event.target.reset();
+    console.log("submit")
+
+});
+
 let onTheMoveElm = undefined;
 
 // Select all tickets
@@ -100,5 +122,30 @@ allColumns.forEach(columnElm => {
     });
 });
 
-localStorage.setItem("")
+// ******* _____________________ ******************
+// localStorage.setItem("abchj" , "some value");
+
+// let value = localStorage.getItem("obj2");
+
+// console.log("value" , value);
+
+// let student ={
+//     name : "Ayan",
+//     roll : 23,
+//     isActive : true,
+//     campus : "Math"
+// }
+
+// let isActive = true ;
+// let student_str = JSON.stringify(isActive);
+// console.log("student_str" , student_str);
+
+// localStorage.setItem("student_str" , student_str);
+
+// student_str = localStorage.getItem("student");
+// console.log("student_str" , student_str);
+
+// student = JSON.parse(student_str);
+// console.log(student.campus);
+
 
