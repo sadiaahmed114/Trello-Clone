@@ -18,9 +18,9 @@ body{
     display: flex;
     gap: 1em;
     overflow-x: auto;
+
 }
 .app-main .column{
-    /* background-color: rgb(184, 110, 123); */
     background-color: rgb(127, 81, 171);
     min-width: 18em;
     min-height: 6em;
@@ -30,11 +30,9 @@ body{
 .app-main .column-dropable {
     background-color: rgb(253, 253, 182);
 }
-.app-main .column .column-heading{
+.app-main .column .col-heading{
     font-size: 1.5em;
-    /* justify-content: center;
-    /* text-align: center; */
-    /* display: flex; */ 
+    gap: 1em;
 }
 .app-main .column .ticket{
     background-color: rgb(209, 138, 204);
@@ -44,3 +42,40 @@ body{
     border-radius: 6px;
     color: black;
 }
+footer {
+    background-color: rgb(27, 25, 78);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 0.125rem;
+    text-align: center;
+    font-size: small;
+    font-weight: 300;
+    color:blueviolet;
+    
+  }
+  
+  footer a {
+    position: relative;
+    z-index: 10;
+    padding-left: 0.25rem; /* Equivalent to px-1 */
+    padding-right: 0.25rem;
+    padding-top: 0.25rem; /* Equivalent to pt-1 */
+    text-decoration: none;
+    font-size: medium;
+    /* color: beige; */
+  }
+  
+  footer a:hover {
+    color: beige;
+  }
+  
+  footer a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    /* color: beige; */
+    transition: width 0.3s ease;
+  }

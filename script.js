@@ -10,30 +10,31 @@
         for(let key in existingTicket){
             console.log("key" , key);
 
-            console.log(existingTicket[key])
+            // console.log(existingTicket[key])
             existingTicket[key].forEach((eachTicket , index) =>{
             // create tickets 
             let div = document.createElement("div");
             div.setAttribute("draggable" , "true");
             div.setAttribute("class" , "ticket");
-            let t = document.createTextNode(userInput);
+            let t = document.createTextNode(eachTicket);
         
             div.appendChild(t);
 
-            let column = document.getElementById(key)
+            let column = document.getElementById(key);
             column.appendChild(div)
             })
         }
     }
+    renderExistingTickets()
 
 
     let ticketSubmitHandler = (event) => {
         event.preventDefault();
 
         // let userInput = document.querySelector('[name="ticketText"]').value;
-        const userInput = event.target.elements.ticketsText.value;
+        const userInput = event.target.elements.ticketText.value;
 
-        console.log(userInput);
+        // console.log(userInput);
 
         let div = document.createElement("div");
         div.setAttribute("draggable" , "true");
@@ -101,7 +102,7 @@
 let onTheMoveElm = undefined;
 
 // Select all tickets
-const allTickets = document.querySelectorAll(".ticket");
+let allTickets = document.querySelectorAll(".ticket");
 
 allTickets.forEach(ticketElm => {
     ticketElm.addEventListener('mousedown', function (e) {
@@ -109,24 +110,24 @@ allTickets.forEach(ticketElm => {
         onTheMoveElm = e.target;
     });
 
-    // Set draggable attribute to true
-    ticketElm.setAttribute('draggable', true);
+    // // Set draggable attribute to true
+    // ticketElm.setAttribute('draggable', true);
 
-    // Add dragstart event to store the element being moved
-    ticketElm.addEventListener('dragstart', function (e) {
-        onTheMoveElm = e.target;
-    });
+    // // Add dragstart event to store the element being moved
+    // ticketElm.addEventListener('dragstart', function (e) {
+    //     onTheMoveElm = e.target;
+    // });
 });
 
 // Select all columns
-const allColumns = document.querySelectorAll(".column");
+let allColumns = document.querySelectorAll(".column");
 
 allColumns.forEach(columnElm => {
 
     columnElm.addEventListener("dragover", (event) => {
         console.log("dragover", event.target.className);
         event.preventDefault();
-        if (event.target.className.includes("column")) {
+        if (event.target.className ==="column") {
             event.target.classList.add("column-dropable");
             // event.target.style.backgroundColor = "blue"
         }
@@ -145,10 +146,11 @@ allColumns.forEach(columnElm => {
         console.log("drop event");
         console.log("event.target.className:", event.target.className);
         if (event.target.className.includes("column")) {
+            event.target.appendChild(onTheMoveElm);
             event.target.classList.remove("column-dropable");
         }
 
-        event.target.appendChild(onTheMoveElm);
+        // event.target.appendChild(onTheMoveElm);
     });
 });
 //  Concept  of Local Storage 
