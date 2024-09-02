@@ -46,28 +46,51 @@
 //     })
 // });
 
-document.querySelector('#addTicketForm').addEventListener('submit' , (event) => {
-    event.preventDefault();
+    let existingTicket = localStorage.getItem("tickets");
+    if(existingTicket){
+        existingTicket = JSON.parse(existingTicket)
+    }else{
+        existingTicket= {};
+    }
 
-    let userInput = document.querySelector('#ticketText').ariaValueMax;
+    document
+    .querySelector('.addTicketForm')
+    .addEventListener('submit' , (event) => {
+        event.preventDefault();
 
-    let div = document.createElement("div")
-    div.setAttribute("draggable" , "true")
-    div.setAttribute("class" , "ticket")
-    let t = document.createTextNode(userInput);
+        let userInput = document.querySelector('[name="ticketText"]').value;
 
-    div.appendChild(t);
+        let div = document.createElement("div")
+        div.setAttribute("draggable" , "true")
+        div.setAttribute("class" , "ticket")
+        let t = document.createTextNode(userInput);
 
-    let column = event.target.parentNode;
-    console.log("column:" , column);
+        div.appendChild(t);
 
-    column.insertBefore(div , event.target)
+        let column = event.target.parentNode;
+        console.log("column:" , column);
 
-    event.target.reset();
-    console.log("submit")
+        column.insertBefore(div , event.target)
 
-});
+    // let existingTickets = localStorage.getItem("tickets");
+    // if(existingTickets){
+    //     existingTickets = JSON.parse(existingTickets)
+    // }else{
+    //     existingTickets= [];
+    // }
+        // if()
+        existingTickets.todo.push(userInput);
 
+        localStorage.set("tickets" ,JSON.stringify(existingTickets));
+
+        event.target.reset();
+
+        console.log("submit");
+    });
+    let a ={
+        "todo" : ["task1" , "task2" , "task3"],
+        "inProgress" :["task1"]
+    }
 let onTheMoveElm = undefined;
 
 // Select all tickets
