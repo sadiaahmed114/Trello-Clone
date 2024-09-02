@@ -1,51 +1,3 @@
-// let onTheMoveElm = undefined;
-
-// allTickets = document.querySelectorAll(".ticket");
-
-// allTickets.forEach(ticketElm => {
-//     ticketElm.addEventListener('mousedown' , function (e) {
-//         console.log("e.target.className : " ,e.target.className);
-//         onTheMoveElm = e.target;
-//     })
-// });
-
-// allColumns = document.querySelectorAll(".column");
-
-// allColumns.forEach(columnElm => {
-
-//     columnElm.addEventListener("dragover" , (event) => {
-
-//         console.log("dragover", e.target.className)
-//         event.preventDefault();
-//         if(event.target.className === "column"){
-//             event.target.classList.add("column-dropable")
-//             // event.target.style.backgroundColor = "blue"
-//         }
-//     });
-
-//     columnElm.addEventListener("dragleave" , (event) => {
-
-//         console.log("drag Leave", e.target.className)
-//         event.preventDefault();
-//         if(event.target.className.includes("column")){
-//             event.target.classList.remove("column-dropable")
-//             // event.target.style.backgroundColor = "rgb(209, 138, 204)"
-//         }
-//     });
-
-//     columnElm.addEventListener('drop' , function (event) {
-
-//         console.log("drop event")
-//         console.log("e.target.className : " ,e.target);
-//         if(event.target.className.includes("column")){
-//             event.target.classList.remove("column-dropable")
-           
-//         }
-
-//         e.target.appendChild(onTheMoveElm)
-//     })
-// });
-
     let existingTicket = localStorage.getItem("tickets");
     if(existingTicket){
         existingTicket = JSON.parse(existingTicket)
@@ -53,16 +5,39 @@
         existingTicket= {};
     }
 
-    document
-    .querySelector('.addTicketForm')
-    .addEventListener('submit' , (event) => {
+    let renderExistingTickets = () => {
+
+        for(let key in existingTicket){
+            console.log("key" , key);
+
+            console.log(existingTicket[key])
+            existingTicket[key].forEach((eachTicket , index) =>{
+            // create tickets 
+            let div = document.createElement("div");
+            div.setAttribute("draggable" , "true");
+            div.setAttribute("class" , "ticket");
+            let t = document.createTextNode(userInput);
+        
+            div.appendChild(t);
+
+            let column = document.getElementById(key)
+            column.appendChild(div)
+            })
+        }
+    }
+
+
+    let ticketSubmitHandler = (event) => {
         event.preventDefault();
 
-        let userInput = document.querySelector('[name="ticketText"]').value;
+        // let userInput = document.querySelector('[name="ticketText"]').value;
+        const userInput = event.target.elements.ticketsText.value;
 
-        let div = document.createElement("div")
-        div.setAttribute("draggable" , "true")
-        div.setAttribute("class" , "ticket")
+        console.log(userInput);
+
+        let div = document.createElement("div");
+        div.setAttribute("draggable" , "true");
+        div.setAttribute("class" , "ticket");
         let t = document.createTextNode(userInput);
 
         div.appendChild(t);
@@ -72,25 +47,57 @@
 
         column.insertBefore(div , event.target)
 
-    // let existingTickets = localStorage.getItem("tickets");
-    // if(existingTickets){
-    //     existingTickets = JSON.parse(existingTickets)
-    // }else{
-    //     existingTickets= [];
-    // }
-        // if()
-        existingTickets.todo.push(userInput);
+        console.log(event.target.parentNode.children[0].innerText);
+        const colTitle = event.target.parentNode.children[0].innerText
+        if(!existingTicket[colTitle]){
+            existingTicket[colTitle] = [];
+        }
+        existingTicket[colTitle].push(userInput);
 
-        localStorage.set("tickets" ,JSON.stringify(existingTickets));
+        localStorage.setItem("tickets" ,JSON.stringify(existingTicket));
 
         event.target.reset();
 
         console.log("submit");
-    });
-    let a ={
-        "todo" : ["task1" , "task2" , "task3"],
-        "inProgress" :["task1"]
-    }
+    };
+
+    document
+    .querySelectorAll('.addTicketForm')
+    .forEach(eachForm =>{
+        eachForm.addEventListener('submit' , ticketSubmitHandler);
+    })
+
+    //     event.preventDefault();
+
+    //     let userInput = document.querySelector('[name="ticketText"]').value;
+
+    //     let div = document.createElement("div")
+    //     div.setAttribute("draggable" , "true")
+    //     div.setAttribute("class" , "ticket")
+    //     let t = document.createTextNode(userInput);
+
+    //     div.appendChild(t);
+
+    //     let column = event.target.parentNode;
+    //     console.log("column:" , column);
+
+    //     column.insertBefore(div , event.target)
+
+    //     if(!existingTicket["todo"]){
+    //         existingTicket.todo = [];
+    //     }
+    //     existingTickets.todo.push(userInput);
+
+    //     localStorage.set("tickets" ,JSON.stringify(existingTickets));
+
+    //     event.target.reset();
+
+    //     console.log("submit");
+    // });
+    // let a ={
+    //     "todo" : ["task1" , "task2" , "task3"],
+    //     "inProgress" :["task1"]
+    // }
 let onTheMoveElm = undefined;
 
 // Select all tickets
@@ -144,7 +151,7 @@ allColumns.forEach(columnElm => {
         event.target.appendChild(onTheMoveElm);
     });
 });
-
+//  Concept  of Local Storage 
 // ******* _____________________ ******************
 // localStorage.setItem("abchj" , "some value");
 
