@@ -64,7 +64,6 @@ footer {
     padding-top: 0.25rem; /* Equivalent to pt-1 */
     text-decoration: none;
     font-size: medium;
-    /* color: beige; */
   }
   
   footer a:hover {
@@ -76,6 +75,5 @@ footer {
     display: block;
     width: 0;
     height: 2px;
-    /* color: beige; */
     transition: width 0.3s ease;
   }
